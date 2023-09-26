@@ -1,0 +1,24 @@
+{
+  "name": "bun-serve-router",
+  "version": "0.0.2",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/louislam/bun-serve-router.git"
+  },
+  "main": "router.ts",
+  "type": "module",
+  "dependencies": {
+    "urlpattern-polyfill": "~9.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "~5.0.0"
+  },
+  "devDependencies": {
+    "bun-types": "~1.0.3"
+  },
+  "files": [
+    "router.ts",
+    "tsconfig.json"
+  ]
+}
