@@ -18,7 +18,7 @@ describe("Test router", () => {
             return new Response("Hello!!!!");
         });
 
-        const response = router.match(request);
+        const response = await router.match(request);
 
         expect(response).toBeInstanceOf(Response);
 
@@ -40,7 +40,7 @@ describe("Test router", () => {
             return new Response(params.id);
         });
 
-        const response = router.match(request);
+        const response = await router.match(request);
 
         expect(response).toBeInstanceOf(Response);
 
@@ -61,7 +61,7 @@ describe("Test router", () => {
                 return new Response("Hello!!!!");
             });
 
-            const response = router.match(request);
+            const response = await router.match(request);
 
             expect(response).toBeUndefined();
     });
@@ -79,7 +79,7 @@ describe("Test router", () => {
                 });
             });
 
-            const response = router.match(request);
+            const response = await router.match(request);
 
             expect(response).toBeInstanceOf(Response);
 
@@ -100,7 +100,7 @@ describe("Test router", () => {
             return new Response("You should not see this!");
         });
 
-        const response = router.match(request);
+        const response = await router.match(request);
 
         expect(response).toBeUndefined();
     });
@@ -124,7 +124,7 @@ describe("Test router", () => {
             return new Response("2");
         });
 
-        const response = router.match(request);
+        const response = await router.match(request);
 
         expect(response).toBeInstanceOf(Response);
 
@@ -133,7 +133,7 @@ describe("Test router", () => {
             expect(await response.text()).toBe("1");
         }
 
-        const response2 = router.match(request2);
+        const response2 = await router.match(request2);
 
         expect(response2).toBeInstanceOf(Response);
 
@@ -142,5 +142,26 @@ describe("Test router", () => {
             expect(await response2.text()).toBe("2");
         }
 
+    });
+
+    test("Test async handler", async () => {
+        const request = new Request("https://example.com", {
+            method: "GET",
+        });
+
+        const router = new Router();
+
+        router.add("GET", "/", async (request, params) => {
+            return new Response("Hello!!!!");
+        });
+
+        const response = await router.match(request);
+
+        expect(response).toBeInstanceOf(Response);
+
+        if (response) {
+            expect(response.status).toBe(200);
+            expect(await response.text()).toBe("Hello!!!!");
+        }
     });
 });

@@ -30,7 +30,7 @@ router.add("GET", "/", (request, params) => {
 In the `fetch` handler of `Bun.server()`, you can match your routes like this:
 
 ```typescript
-const response = router.match(request);
+const response = await router.match(request);
 ```
 
 Since it is possible that no route matches, you should check if `response` is not `undefined` before returning it:
@@ -54,9 +54,9 @@ router.add("GET", "/", (request, params) => {
 })
 
 Bun.serve({
-    fetch(request) {
+    async fetch(request) {
         // Match here
-        const response = router.match(request);
+        const response = await router.match(request);
         if (response) {
             return response;
         }
