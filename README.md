@@ -33,7 +33,7 @@ In the `fetch` handler of `Bun.server()`, you can match your routes like this:
 const response = router.match(request);
 ```
 
-Since it is possible that no route matches, you should check if `response` is not `underfined` before returning it:
+Since it is possible that no route matches, you should check if `response` is not `undefined` before returning it:
 
 ```typescript
 if (response) {
